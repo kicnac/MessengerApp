@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainPage">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="ComApp"
+            android:textSize="10pt"
+            android:textStyle="bold" />
+
+        <RelativeLayout
+            android:id="@+id/rlBtns"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <LinearLayout
+                android:id="@+id/LLBtns"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="190dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/ivPhoto"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/photo" />
+
+                <ImageView
+                    android:id="@+id/ivSearch"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="10dp"
+                    android:src="@drawable/seatch" />
+
+                <ImageView
+                    android:id="@+id/ivMore"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="10dp"
+                    android:src="@drawable/settings" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/etSearch"
+                android:layout_width="230dp"
+                android:layout_height="wrap_content"
+                android:hint="Search..."
+                android:visibility="gone" />
+
+            <Spinner
+                android:id="@+id/spn_search"
+                android:layout_width="230dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/etSearch"
+                android:layout_marginLeft="10dp"
+                android:visibility="gone" />
+
+            <Spinner
+                android:id="@+id/spn_more"
+                android:layout_width="230dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/etSearch"
+                android:layout_alignBottom="@+id/LLBtns"
+                android:visibility="gone" />
+        </RelativeLayout>
+
+        <HorizontalScrollView
+            android:id="@+id/sv_btn_above_chats"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnMP1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Все"
+                    android:textSize="@dimen/btn_text_size" />
+
+                <Button
+                    android:id="@+id/btnMP2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Непрочитанное"
+                    android:textSize="@dimen/btn_text_size" />
+
+                <Button
+                    android:id="@+id/btnMP3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Избранное"
+                    android:textSize="@dimen/btn_text_size" />
+
+                <Button
+                    android:id="@+id/btnMP4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Группы"
+                    android:textSize="@dimen/btn_text_size" />
+
+                <Button
+                    android:id="@+id/btnMP5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="+"
+                    android:textSize="@dimen/btn_text_size" />
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <ScrollView
+            android:id="@+id/svChats"
+            android:layout_width="match_parent"
+            android:layout_height="620dp">
+
+            <LinearLayout
+                android:id="@+id/LLChats"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/ivChats"
+                android:layout_width="33dp"
+                android:layout_height="40dp"
+                android:src="@drawable/chats" />
+
+            <ImageView
+                android:id="@+id/ivStats"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="30dp"
+                android:src="@drawable/state" />
+
+            <ImageView
+                android:id="@+id/ivGroups"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="30dp"
+                android:src="@drawable/groups" />
+
+            <ImageView
+                android:id="@+id/ivCalls"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="30dp"
+                android:src="@drawable/calls" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/ivAddChats"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="650dp"
+        android:layout_marginEnd="31dp"
+        android:src="@drawable/chat_plus"
+        />
+</RelativeLayout>

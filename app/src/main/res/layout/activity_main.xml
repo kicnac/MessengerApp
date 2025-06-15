@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textSize="8pt"
+        android:text="Loggin page"
+        />
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        />
+    <EditText
+        android:id="@+id/loginEditTxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="login"
+        />
+    <EditText
+        android:id="@+id/passwordEditTxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="password"
+        />
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        />
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:layout_gravity="center_horizontal"
+        android:text="btn_login"
+        android:onClick="btnLoginPageClick"
+        />
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        />
+    <Button
+        android:id="@+id/btn_switchToRegistration"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:layout_gravity="center_horizontal"
+        android:text="btn_registration"
+        android:onClick="btnLoginPageClick"
+        />
+
+
+
+
+</LinearLayout>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/llCallItem"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:padding="15dp"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+    <ImageView
+        android:id="@+id/ivContactAvatar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="start"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tvContactName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="6pt"
+            android:padding="5dp"
+            android:text="Contact name"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageView
+                android:id="@+id/ivCallType"
+                android:layout_width="30dp"
+                android:layout_height="30dp"/>
+        <TextView
+            android:id="@+id/tvDateCall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="6pt"
+            android:padding="5dp"
+            android:text="Type and date of the call"/>
+
+        </LinearLayout>
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/iv_phone_call_Calls"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="end"/>
+
+    <ImageView
+        android:id="@+id/iv_video_call_Calls"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="end"/>
+</LinearLayout>

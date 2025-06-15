@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">MessengerApp</string>
+    <string-array name="spinner_item">
+        <item>Option 1</item>
+        <item>Option 2</item>
+        <item>Option 3</item>
+    </string-array>
+    <string-array name="spinner_item_more">
+        <item>Option more 1</item>
+        <item>Option more 2</item>
+        <item>Option more 3</item>
+    </string-array>
+</resources>
