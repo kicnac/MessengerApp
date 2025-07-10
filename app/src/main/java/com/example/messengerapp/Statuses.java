@@ -15,19 +15,16 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Calls extends AppCompatActivity {
+public class Statuses extends AppCompatActivity {
     private static final int REQUEST_CAMERA = 1;
 
-    // UI элементы
-    private LinearLayout LLCallsList;
-    private ImageView ivChats, ivGroups, ivStates;
-    private TextView tvHeadline;
+    private ImageView ivGroups,ivChats,ivCalls;
+    private LinearLayout LLStatusList;
 
         // New UI elements for buttons
     private ImageView ivSearch, ivMore;
@@ -37,23 +34,18 @@ public class Calls extends AppCompatActivity {
     
     private boolean isSearchExpanded = false;
     private boolean isMoreMenuVisible = false;
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.calls_activity);
-
+        setContentView(R.layout.states_activity);
         initViews();
         setupNavigation();
-        displayCallLists();
+        displayStatusLists();
     }
-
     private void initViews() {
-        ivChats = findViewById(R.id.ivChats);
-        ivGroups = findViewById(R.id.ivGroups);
-        ivStates = findViewById(R.id.ivStats);
-        LLCallsList = findViewById(R.id.LLCallsList);
-        tvHeadline = findViewById(R.id.tvHeadline);
+        ivGroups =findViewById(R.id.ivGroups);
+        ivChats =findViewById(R.id.ivChats);
+        ivCalls =findViewById(R.id.ivCalls);
+        LLStatusList = findViewById(R.id.LLStatusList);
 
         // Initialize new UI elements
         ivSearch = findViewById(R.id.ivSearch);
@@ -63,19 +55,17 @@ public class Calls extends AppCompatActivity {
         etSearch = findViewById(R.id.etSearch);
         searchParams = (LinearLayout.LayoutParams) ivSearch.getLayoutParams();
     }
-
     private void setupNavigation() {
         ivChats.setOnClickListener(v -> navigateTo(MainPage.class));
         ivGroups.setOnClickListener(v -> navigateTo(Groups.class));
-        ivStates.setOnClickListener(v -> navigateTo(Statuses.class));
+        ivCalls.setOnClickListener(v -> navigateTo(Calls.class));
 
         // Setup new button functionality
         setupSpinners();
         setupClickListeners();
     }
-
     private void navigateTo(Class<?> destination) {
-        startActivity(new Intent(Calls.this, destination));
+        startActivity(new Intent(Statuses.this, destination));
     }
 
     private void setupSpinners() {
@@ -104,7 +94,7 @@ public class Calls extends AppCompatActivity {
                 String selectedItem = parent.getItemAtPosition(position).toString();
                 // Handle selected item
                 if (selectedItem.equals("Настройки")) {
-                    Intent intent = new Intent(Calls.this, Settings.class);
+                    Intent intent = new Intent(Statuses.this, Settings.class);
                     startActivity(intent);
                 }
             }
@@ -156,120 +146,90 @@ public class Calls extends AppCompatActivity {
 
         ivSearch.setLayoutParams(searchParams);
     }
-
-    private void displayCallLists() {
-        List<Call> allCalls = generateTestCalls();
-        List<Call> favCalls = new ArrayList<>();
-        List<Call> recentCalls = new ArrayList<>();
+    private void displayStatusLists() {
+        List<Status> allStatuses = generateTestStatuses();
+        List<Status> etcStatuses = new ArrayList<>();
+        List<Status> recentStatuses = new ArrayList<>();
 
         // Разделение звонков на избранные и обычные
-        for (Call call : allCalls) {
-            if (call.isFavorite()) {
-                favCalls.add(call);
+        for (Status status : allStatuses) {
+            if (!status.isRecent()) {
+                etcStatuses.add(status);
             } else {
-                recentCalls.add(call);
+                recentStatuses.add(status);
             }
         }
 
         // Очистка списка перед добавлением новых элементов
-        LLCallsList.removeAllViews();
+        LLStatusList.removeAllViews();
 
         // Добавление избранных звонков
-        if (!favCalls.isEmpty()) {
-            addSectionHeader("Избранные");
-            fillCallList(favCalls);
+        if (!etcStatuses.isEmpty()) {
+            addSectionHeader("Все");
+            fillStatusList(etcStatuses);
         }
 
         // Добавление недавних звонков
         addSectionHeader("Недавние");
-        fillCallList(recentCalls);
+        fillStatusList(recentStatuses);
     }
-
-    private void addSectionHeader(String title) {
-        LayoutInflater inflater = LayoutInflater.from(this);
-        View headerView = inflater.inflate(R.layout.headline, LLCallsList, false);
-        TextView headerText = headerView.findViewById(R.id.tvHeadline);
-        headerText.setText(title);
-        LLCallsList.addView(headerView);
-    }
-
-    private List<Call> generateTestCalls() {
-        List<Call> calls = new ArrayList<>();
+    private List<Status> generateTestStatuses() {
+        List<Status> statuses = new ArrayList<>();
         Random random = new Random();
-        int callCount = 15;
-        int favoriteCount = 5;
+        int statusCount = 15;
+        int recentCount = 5;
 
-        for (int i = 0; i < callCount; i++) {
-            Call.CallType type = Call.CallType.values()[random.nextInt(3)];
-            calls.add(new Call(
+        for (int i = 0; i < statusCount; i++) {
+            statuses.add(new Statuses.Status(
                     "Контакт " + (i + 1),
                     "Сегодня в " + (i % 12 + 1) + ":00",
                     "img_" + (i % 5),
-                    i < favoriteCount,
-                    type
+                    i < recentCount
             ));
         }
-        return calls;
+        return statuses;
     }
-
-    private void fillCallList(List<Call> calls) {
+    private void fillStatusList(List<Statuses.Status> statuses) {
         LayoutInflater inflater = LayoutInflater.from(this);
 
-        for (Call call : calls) {
-            View itemView = inflater.inflate(R.layout.calls_item, LLCallsList, false);
+        for (Statuses.Status status : statuses) {
+            View itemView = inflater.inflate(R.layout.status_item, LLStatusList, false);
 
-            ImageView ivContactAvatar = itemView.findViewById(R.id.ivContactAvatar);
-            TextView tvContactName = itemView.findViewById(R.id.tvContactName);
-            TextView tvDateCall = itemView.findViewById(R.id.tvDateCall);
-            ImageView ivCallType = itemView.findViewById(R.id.ivCallType);
+            ImageView ivContactAvatarStatus = itemView.findViewById(R.id.ivContactAvatarStatus);
+            TextView tvContactNameStatus = itemView.findViewById(R.id.tvContactNameStatus);
+            TextView tvDateStatus = itemView.findViewById(R.id.tvDateStatus);
 
-            ivContactAvatar.setImageResource(R.drawable.efault_chat_img);
-            tvContactName.setText(call.getContactName());
-            tvDateCall.setText(call.getDateOfCall());
+            ivContactAvatarStatus.setImageResource(R.drawable.efault_chat_img);
+            tvContactNameStatus.setText(status.getContactName());
+            tvDateStatus.setText(status.getDateOfStatus());
 
-            setupCallTypeIcon(ivCallType, tvContactName, call.getType());
-            LLCallsList.addView(itemView);
+            LLStatusList.addView(itemView);
         }
     }
-
-    private void setupCallTypeIcon(ImageView iconView, TextView nameView, Call.CallType type) {
-        switch (type) {
-            case INCOMING:
-                iconView.setImageResource(R.drawable.incoming_call);
-                break;
-            case OUTGOING:
-                iconView.setImageResource(R.drawable.outgoing_call);
-                break;
-            case MISSED:
-                iconView.setImageResource(R.drawable.missed_call);
-                nameView.setTextColor(ContextCompat.getColor(this, R.color.red));
-                break;
-        }
+    private void addSectionHeader(String title) {
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View headerView = inflater.inflate(R.layout.headline, LLStatusList, false);
+        TextView headerText = headerView.findViewById(R.id.tvHeadline);
+        headerText.setText(title);
+        LLStatusList.addView(headerView);
     }
-
-    // Модель данных для звонка
-    static class Call {
+    //Структура данных Статус
+    static class Status{
         private final String contactName;
-        private final String dateOfCall;
+        private final String dateOfStatus;
         private final String imgName;
-        private final boolean isFavorite;
-        private final CallType type;
+        private final boolean isRecent;
 
-        enum CallType {
-            INCOMING, OUTGOING, MISSED
-        }
-
-        public Call(String contactName, String dateOfCall, String imgName, boolean isFavorite, CallType type) {
+        public Status(String contactName, String dateOfStatus, String imgName, boolean isFavorite) {
             this.contactName = contactName;
-            this.dateOfCall = dateOfCall;
+            this.dateOfStatus = dateOfStatus;
             this.imgName = imgName;
-            this.isFavorite = isFavorite;
-            this.type = type;
+            this.isRecent = isFavorite;
         }
 
         public String getContactName() { return contactName; }
-        public String getDateOfCall() { return dateOfCall; }
-        public boolean isFavorite() { return isFavorite; }
-        public CallType getType() { return type; }
+        public String getDateOfStatus() { return dateOfStatus; }
+        public boolean isRecent() { return isRecent; }
     }
+
 }

@@ -37,7 +37,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".StatesActivity"
+            android:name=".Statuses"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -54,6 +54,14 @@
         </activity>
         <activity
             android:name=".Calls"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Settings"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
