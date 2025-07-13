@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     public void btnLoginPageClick(View v){
         int id = v.getId();
         Intent intent = new Intent(this, MainPage.class);
-        startActivity(intent);
+        startActivity(intent);//Skip authorisation process
 //        if(id == R.id.btn_login){
 //            EditText loginEditTxt = findViewById(R.id.loginEditTxt);
 //            EditText passwordEditTxt = findViewById(R.id.passwordEditTxt);
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 //            startActivity(intent);
 //        }
     }
-    public void getLoginPassword(HashMap<String,String> loginList){
-
-    }
+//    public void getLoginPassword(HashMap<String,String> loginList){
+//
+//    }
 }

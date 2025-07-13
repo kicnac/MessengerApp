@@ -178,6 +178,14 @@ public class MainPage extends AppCompatActivity {
             tvChatName.setText(chat.name);
             tvLastMessage.setText(chat.lastMessage);
 
+            // Make chat item clickable
+            chatView.setOnClickListener(v -> {
+                Intent intent = new Intent(MainPage.this, ChatHistoryActivity.class);
+                intent.putExtra("contact_name", chat.name);
+                intent.putExtra("contact_id", chat.id);
+                startActivity(intent);
+            });
+
             LLChats.addView(chatView);
         }
     }
@@ -185,17 +193,19 @@ public class MainPage extends AppCompatActivity {
     private List<Chat> generateTestChats() {
         List<Chat> chats = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            chats.add(new Chat("Name" + (i + 1), "Last chat message"));
+            chats.add(new Chat("user_" + (i + 1), "Name" + (i + 1), "Last chat message"));
         }
         return chats;
     }
 
     // Chat data model
     static class Chat {
+        String id;
         String name;
         String lastMessage;
 
-        public Chat(String name, String lastMessage) {
+        public Chat(String id, String name, String lastMessage) {
+            this.id = id;
             this.name = name;
             this.lastMessage = lastMessage;
         }
